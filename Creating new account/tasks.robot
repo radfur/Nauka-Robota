@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation   Tworzenie nowego konta na stronie 
+Documentation   Creating new account via email
 
 Library    Screenshot
 Library    RPA.Browser.Selenium
