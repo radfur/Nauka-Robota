@@ -7,25 +7,27 @@ Library    String
 
 *** Variables ***
 
-${random_number}=  Generate Random String  9  [NUMBERS]
-${random_char}=  Generate Random String 5  [LETTERS]
+${random_number}=   Generate Random String  9  [NUMBERS]  #nie działa
+${random_char}=    Generate Random String 5  [LETTERS]    #nie działa
 
 *** Keywords ***
 Open Browser
     Open Chrome Browser    http://automationpractice.com/index.php
-    Click Button When Visible     //*[@id="header"]/div[2]/div/div/nav/div[1]/a
-			
+    Wait Until Element Is Visible    xpath:/html/body/div/div[1]/header/div[2]/div/div
+    Click Link    xpath:/html/body/div/div[1]/header/div[2]/div/div/nav/div[1]/a			
 *** Keywords ***
 Generate mail
-    Take Screenshot
-    Input Text When Element Is Visible   email_create   ${random_number}${random_char}@yopmail.com
-    Take Screenshot
-*** Keywords ***
-#Random Number
-#   ${random}=  Generate Random String  9  [NUMBERS]
+    
+    Input Text When Element Is Visible   email_create   ${random_number}${random_char}@yopmail.com    #nie działa
+    
+
 
 *** Tasks ***
 Minimal task
     Open Browser
     Generate mail
     
+*** Tasks ***
+Validation
+    
+    Textfield Should Contain    email_create   ${random_number}${random_char}@yopmail.com
