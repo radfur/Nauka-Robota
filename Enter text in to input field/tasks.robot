@@ -13,20 +13,18 @@ Open The Internet Browser
 
     Open Chrome Browser    ${URL}
     
-*** Keywords *** 
 Input text
     
     Input Text When Element Is Visible    search_query_top    Działa
 
-*** Keywords ***
-Screencapture
-    Take Screenshot     
-
 *** Tasks ***
 Login test
     Open The Internet Browser
-    Screencapture
     Input text
-    Screencapture
 
+*** Tasks ***
+Validation
+    Take Screenshot
+    Textfield Should Contain    search_query_top    Działa
+    
 
