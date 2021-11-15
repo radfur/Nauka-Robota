@@ -1,33 +1,25 @@
 *** Settings ***
-Documentation   Creating new account via email
 
-Library    Screenshot
+Documentation    Login new account using randomly generated email 
+
 Library    RPA.Browser.Selenium
 Library    String
+Library    Screenshot
 
 *** Variables ***
-
-${random_number}=   Generate Random String  9  [NUMBERS]  #nie działa
-${random_char}=    Generate Random String 5  [LETTERS]    #nie działa
+${URL}=    http://automationpractice.com/index.php
 
 *** Keywords ***
 Open Browser
-    Open Chrome Browser    http://automationpractice.com/index.php
-    Wait Until Element Is Visible    xpath:/html/body/div/div[1]/header/div[2]/div/div
-    Click Link    xpath:/html/body/div/div[1]/header/div[2]/div/div/nav/div[1]/a			
-*** Keywords ***
-Generate mail
+    Open Chrome Browser    ${URL}
+Move to Sign In Page
+    Click Link    xpath://*[@id="header"]/div[2]/div/div/nav/div[1]/a
+    [Arguments]    ${number}
+    Input Text When Element Is Visible    email_create    stefan+${number}@yopmail.com
     
-    Input Text When Element Is Visible   email_create   ${random_number}${random_char}@yopmail.com    #nie działa
-    
-
-
-*** Tasks ***
-Minimal task
+*** Test Cases ***
+Test
     Open Browser
-    Generate mail
-    
-*** Tasks ***
-Validation
-    
-    Textfield Should Contain    email_create   ${random_number}${random_char}@yopmail.com
+    ${number}=    Generate Random String    2    1234567890
+    Move to Sign In Page   ${number} 
+    Take Screenshot
