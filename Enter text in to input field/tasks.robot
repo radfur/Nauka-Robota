@@ -2,29 +2,23 @@
 Documentation   Prosty robot wpisujący jednego stringa w wyszukiwarkę
 
 Library    RPA.Browser.Selenium
-Library    Screenshot
 
+
+Suite Teardown    Close All Browsers
 *** Variables ***
 
 ${URL}=     http://automationpractice.com/index.php
 
 *** Keywords ***
 Open The Internet Browser
-
+    
     Open Chrome Browser    ${URL}
-    
-Input text
-    
+    Set Selenium Implicit Wait  10    
     Input Text When Element Is Visible    search_query_top    Działa
 
-*** Tasks ***
+*** Test Cases ***
 Login test
     Open The Internet Browser
-    Input text
-
-*** Tasks ***
-Validation
-    Take Screenshot
     Textfield Should Contain    search_query_top    Działa
     
 
